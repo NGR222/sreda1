@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Лидген</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="popup" class="popup">
+      <div class="popup__overlay"></div>
+      <div class="popup__content">
+        <button
+          id="close-popup"
+          class="popup__close"
+          aria-label="Закрыть"
+        ></button>
+        <div class="popup__body">
+          <p></p>
+          <p></p>
+          <p>erid:</p>
+        </div>
+      </div>
+    </div>
+
+    <a href="https://www.sreda13.ru/lidform" target="_blank">
+      <article class="banner">
+        <button id="open-popup" class="popup-button">Реклама</button>
+        <div class="banner1">
+          <img class="logo" src="logo.svg" alt="логотип" />
+          <div class="text-wrapper">
+            <h1 class="title1">лиды</h1>
+            <p class="text1">для <br />застройщика</p>
+          </div>
+          <img class="qr" src="qr.png" alt="" />
+        </div>
+
+        <div class="banner2">
+          <img class="logo" src="logo.svg" alt="логотип" />
+          <div class="text-wrapper2">
+            <p class="text1">гарантия <br />под</p>
+            <h1 class="title2">KPI</h1>
+          </div>
+        </div>
+
+        <div class="banner3">
+          <img class="logo" src="logo.svg" alt="логотип" />
+          <div class="text-wrapper">
+            <h1 class="title3">топ-10</h1>
+            <p class="text3">
+              консалтинговых<br />
+              компаний РФ <br />
+              в сфере <br />продуктового<br />
+              девелопмента*
+            </p>
+          </div>
+          <p class="disc">
+            *Реестр ЕРЗ РФ 2026 в сфере продуктового девелопмента.
+          </p>
+        </div>
+
+      </article>
+    </a>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const popup = document.getElementById("popup");
+        const openBtn = document.getElementById("open-popup");
+        const closeBtn = document.getElementById("close-popup");
+
+        openBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          popup.classList.add("popup--open");
+          document.body.style.overflow = "hidden";
+        });
+
+        closeBtn.addEventListener("click", closePopup);
+
+        popup.addEventListener("click", (e) => {
+          if (
+            e.target === popup ||
+            e.target.classList.contains("popup__overlay")
+          ) {
+            closePopup();
+          }
+        });
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && popup.classList.contains("popup--open")) {
+            closePopup();
+          }
+        });
+
+        function closePopup() {
+          popup.classList.remove("popup--open");
+          document.body.style.overflow = "";
+        }
+      });
+    </script>
+
+    <script src="js.js"></script>
+  </body>
+</html>

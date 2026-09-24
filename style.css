@@ -1,0 +1,394 @@
+@font-face {
+  font-family: "Suisse Intl Light";
+  src:
+    url("suisseintl-light.woff2") format("woff2"),
+    url("suisseintl-light.woff") format("woff");
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Suisse Intl SemiBold";
+  src:
+    url("suisseintl-semibold.woff2") format("woff2"),
+    url("suisseintl-semibold.woff") format("woff");
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Suisse Intl Bold";
+  src:
+    url("suisseintl-bold.woff2") format("woff2"),
+    url("suisseintl-bold.woff") format("woff");
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Suisse Intl Book";
+  src:
+    url("suisseintl-book.woff2") format("woff2"),
+    url("suisseintl-book.woff") format("woff");
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Suisse Intl Medium";
+  src:
+    url("suisseintl-medium.woff2") format("woff2"),
+    url("suisseintl-medium.woff") format("woff");
+  font-style: normal;
+  font-display: swap;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  color: currentColor;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+img {
+  padding: 0;
+  margin: 0;
+}
+
+.popup-button {
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.601);
+  border-radius: 6px;
+  padding: 2px 2px;
+  cursor: pointer;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.popup-button:hover {
+  background: white;
+  color: #000;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+  z-index: 1000;
+}
+
+.popup--open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.popup__content {
+  position: relative;
+  max-width: 400px;
+  width: 90%;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  transform: translateY(20px);
+  opacity: 0;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+  margin: auto;
+  top: 30%;
+  transform: translateY(60px);
+}
+
+.popup--open .popup__content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.popup__close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 24px;
+  line-height: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.2s;
+}
+
+.popup__close:hover {
+  color: #000;
+}
+
+.popup__body {
+  padding: 24px 24px 32px;
+  text-align: center;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.popup__body h2 {
+  font-size: 16px;
+  margin-bottom: 16px;
+  color: #000;
+}
+
+.banner {
+  position: relative;
+  max-inline-size: 280px;
+  block-size: 937px;
+  background-color: #0b181c;
+  background-image: url(back.png);
+  display: flex;
+  background-position: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.banner1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.logo {
+  width: clamp(3.5rem, 0.517rem + 79.545vw, 14.438rem);
+}
+
+.text-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title1 {
+  font-family: "Suisse Intl SemiBold", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: clamp(1rem, 0.063rem + 25vw, 4.438rem);
+  line-height: 100px;
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  background: linear-gradient(
+    131.1deg,
+    #97a0a8 34.58%,
+    #dce0e6 59.15%,
+    #898b8e 80.06%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.text1 {
+  font-family: "Suisse Intl Light", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: clamp(0.438rem, 0.063rem + 10vw, 1.813rem);
+  line-height: 140%;
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-align: left;
+}
+
+.qr {
+  width: clamp(3.063rem, 0.42rem + 70.455vw, 12.75rem);
+}
+
+.banner2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.text-wrapper2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  margin-right: 22px;
+  margin-top: 111px;
+  justify-self: center;
+}
+
+.title2 {
+  font-family: "Suisse Intl SemiBold", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: clamp(2rem, 0.534rem + 39.091vw, 7.375rem);
+  line-height: 110px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  background: linear-gradient(
+    131.1deg,
+    #97a0a8 34.58%,
+    #dce0e6 59.15%,
+    #898b8e 80.06%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.banner3 {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.title3 {
+  font-family: "Suisse Intl SemiBold", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: clamp(1rem, 0.216rem + 20.909vw, 3.875rem);
+  line-height: 110px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  background: linear-gradient(
+    131.1deg,
+    #97a0a8 34.58%,
+    #dce0e6 59.15%,
+    #898b8e 80.06%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.text3 {
+  font-family: "Suisse Intl Light", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: clamp(0.375rem, 0.051rem + 8.636vw, 1.563rem);
+  line-height: clamp(0.688rem, 0.381rem + 8.182vw, 1.813rem);
+  color: #ffffff;
+  text-align: left;
+}
+
+.disc {
+  font-family: "Suisse Intl Book", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: clamp(0.313rem, 0.142rem + 4.545vw, 0.938rem);
+  line-height: clamp(0.75rem, 0.665rem + 2.273vw, 1.063rem);
+  color: #ffffff;
+  padding-top: 100px;
+}
+
+@media (max-width: 200px) {
+  .text-wrapper2 {
+    margin-right: 0px;
+    margin-top: 162px;
+  }
+}
+
+@media (max-width: 162px) {
+  .text-wrapper2 {
+    margin-top: 208px;
+    margin-right: 0px;
+  }
+}
+
+@media (max-width: 128px) {
+  .text-wrapper2 {
+    margin-top: 250px;
+    margin-right: 0px;
+  }
+}
+
+
+@media (max-width: 110px) {
+  .banner {
+    display: none;
+  }
+}
