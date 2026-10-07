@@ -218,12 +218,134 @@ img {
   padding-bottom: 30px;
 }
 
-.banner1 {
+/* ---------- Слайдер: плавные перекрёстные переходы ---------- */
+.banner1,
+.banner2,
+.banner3 {
+  position: absolute;
+  inset: 30px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px) scale(0.985);
+  transition:
+    opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.65s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0s linear 0.65s;
+  pointer-events: none;
+}
+
+.banner.is-active-slide-none .banner1 {
+  /* резерв на случай, если JS не загрузился */
+}
+
+.banner1.is-active,
+.banner2.is-active,
+.banner3.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  transition:
+    opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.65s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0s;
+  pointer-events: auto;
+}
+
+/* Каскадное появление содержимого активного слайда */
+.banner1.is-entering > *,
+.banner2.is-entering > *,
+.banner3.is-entering > * {
+  animation: slideItemIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+@keyframes slideItemIn {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Тонкая «дышащая» подсветка фона баннера */
+.banner::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(
+    ellipse at 50% 30%,
+    rgba(255, 255, 255, 0.07),
+    transparent 60%
+  );
+  animation: bgBreathe 9s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes bgBreathe {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+/* Индикаторы-точки внизу баннера */
+.slider-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  right: 0;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
+  justify-content: center;
+  gap: 8px;
+  z-index: 5;
+}
+
+.slider-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  padding: 0;
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease;
+}
+
+.slider-dot:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.slider-dot.is-active {
+  background: #dce0e6;
+  transform: scale(1.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .banner1,
+  .banner2,
+  .banner3 {
+    transition-duration: 0.01s;
+  }
+  .banner1.is-entering > *,
+  .banner2.is-entering > *,
+  .banner3.is-entering > * {
+    animation: none;
+  }
+  .banner::before {
+    animation: none;
+  }
 }
 
 .logo {
@@ -276,11 +398,9 @@ img {
 }
 
 .banner2 {
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  display: none;
 }
 
 .text-wrapper2 {
@@ -316,11 +436,9 @@ img {
 }
 
 .banner3 {
-  display: none;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 100%;
 }
 
 .title3 {
